@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+        <link rel="icon" href="/static/images/diapo.svg">
+        <title>Anrezki.Présentation</title>
+    </head>
+    <body>
+        <div class="block_page">
+            {% if connected%}
+                <a href="{{url_for('acceuil')}}"><section class="acceuil">
+                    <header class="codrops-header">
+                        <h1>Anrezki.Présentation
+                        <span>Gestion des Présentations</span>
+                        </h1>
+                    </header></a>
+                    {% block changer %}{% endblock %}
+                </section> 
+            {% else %}
+                <section class="authentification">
+                    <div class="limiter">
+                        <div class="container-login100">
+                          <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                            <form action="{{url_for('acceuil')}}" class="login100-form validate-form" style="padding:50px" method=post>
+                              <!--<span class="login100-form-title p-b-49">
+                                Authentification
+                              </span>-->
+                              <br>
+                              <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                <!--<span class="label-input100">Mot de passe</span>-->
+                                <input class="input100" type="password" name="password" placeholder="Entrer votre mot de passe" id="password" required>
+                                <span class="focus-input100" data-symbol="&#xf190;"></span><button type="button" onclick=afficherPassword() >
+                                <i class="fa fa-eye">
+                                </i>
+                            </button> <br>
+                              </div>
+
+                              <br><br>
+                              <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                  <div class="login100-form-bgbtn"></div>
+                                  <button class="login100-form-btn" type="submit">
+                                    Soumettre
+                                  </button>
+                                </div>
+                                <p style="color:red; font-size: 14px; font-style: bold;">{{text}}</p>
+                              </div>
+                              <br><br>
+                          </div>
+                          </form>
+                        </div>
+                        <script src="/static/js/fonction.js"></script>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+          <footer>
+              <div class="ligne">
+                  <div class="content">
+                      <h2 class="footer">© <script>document.write(new Date().getFullYear());</script> Anrezki.Présentation par Ayouba Anrezki</h2>
+                  </div>
+              </div>
+          </footer>
+</body>
+</html>

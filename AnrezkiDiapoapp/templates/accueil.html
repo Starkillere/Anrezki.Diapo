@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block changer %}
+<link rel="stylesheet" type="text/css" href="/static/css/acceuil.css">
+<div class="main clearfix">
+    <div class="column">
+        <a href="{{url_for('tableau')}}"><div class="content">
+            <div class="text">
+                <p>{{text}}</p>
+            </div>
+            <div class="prewies">
+                <img src="{{image}}" alt="prewies">
+            </div>
+        </div></a>
+        
+    </div>
+    <div class="column">
+        <nav class="codrops-demos">
+            {% for data in datas%}
+                <a href="/{{data}}">{{data}}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</div>
+{% endblock %}

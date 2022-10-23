@@ -1,0 +1,68 @@
+.tableau_de_bord
+{
+    margin: 5%;
+    padding-bottom: 10%;
+
+}
+
+.tableau_de_bord .indisponible
+{
+    text-align: center;
+    color: rgba(2, 114, 114, 0.685);
+    font-size: 2em;
+}
+
+.tableau_de_bord .content
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 70px 1em;
+}
+
+.tableau_de_bord .content .cont
+{
+    background-color: rgba(41, 41, 41, 0.541);
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.349);
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.tableau_de_bord .content .cont:hover
+{
+    -webkit-transform: scale(1.1);
+	transform: scale(0.8);
+}
+
+.tableau_de_bord .content .image 
+{
+    padding: 5%;
+}
+
+.tableau_de_bord .content .image img
+{
+    width: 50px;
+    height: 50px;
+}
+
+.tableau_de_bord .content .button-content .titre
+{
+    color: white;
+    margin-top: 2%;
+    padding: 2%;
+    background: linear-gradient(to right, rgb(0, 0, 0), rgba(247, 242, 242, 0.103));
+}
+
+@media screen and (max-width: 900px) 
+{
+    .tableau_de_bord .content
+    {
+        display: block;
+    }
+    .tableau_de_bord .content .cont
+    {
+        margin-bottom: 5%;
+    }
+
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block changer %}
+<link rel="stylesheet" type="text/css" href="/static/css/tableau_de_bord.css">
+<section class="tableau_de_bord">
+        {% if presentations == [] %}
+            <div class="indisponible">
+                <h1>Aucune présentation disponible...</h1>
+            </div>    
+        {% else %}
+            <form action="/tableau-de-bord" method="post">
+                <input type="hidden" id="presentation" class="presentation" name="presentation">
+                <div class="content">
+                    {% for presentation in presentations %}
+                        <button type="submit" class="cont" id="{{presentation}}" onclick="send(this.id)">
+                            <div class="button-content">
+                                <div class="image">
+                                    <!--<img src="/templates/Diaporama-{{presentation}}/static/images/preface.png" alt="preface">-->
+                                    <img src="/static/images/diapo.svg" alt="preface">
+                                </div>
+                                <div class="titre">
+                                    <h1>Présentation {{presentation}}</h1>
+                                </div>
+                            </div>
+                        </button>
+                    {% endfor %}
+                </div>
+            </form>    
+        {% endif %}
+</section>
+<script>
+    function send(ids) {
+        document.getElementById('presentation').value = ids;
+    };
+</script>
+{% endblock %}

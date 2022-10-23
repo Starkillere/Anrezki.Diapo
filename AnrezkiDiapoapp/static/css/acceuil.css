@@ -1,0 +1,123 @@
+.column {
+    float: left;
+    width: 50%;
+    padding: 0 2em;
+    min-height: 300px;
+    position: relative;
+    text-align: right;
+}
+
+
+.clearfix:after {
+    clear: both;
+}
+.clearfix:before, .clearfix:after {
+    display: table;
+    content: " ";
+}
+.column:nth-child(2) {
+    text-align: left;
+    border-left: 3px solid #ed8051a1;
+}
+
+.codrops-demos > a {
+    width: 90%;
+}
+.codrops-demos a {
+    border: none;
+    padding: 0.6em 1.2em;
+    background: #a9a9a9;
+    color: #fff;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 2px;
+    font-weight: 400;
+    outline: none;
+}
+
+.codrops-demos a:hover
+{
+    background-color: #000000c9;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.column .content
+{
+    border: 1px solid black;
+    display: block;
+    width: 500px;
+    height: 300px;
+    text-align: left;
+    font-size: 2em;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.349);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.column .content .text
+{
+    padding: 2%;
+    color: #fff;
+    background-color: rgba(24, 23, 23, 0.795);
+}
+
+.column .content .prewies img
+{
+    width: 498px;
+    height: 239px;
+    
+}
+
+.column .content:hover
+{
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+    -webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+@media screen and (max-width: 900px) 
+{
+    .clearfix:before, .clearfix:after {
+        display: block;
+    }
+
+    .column
+    {
+        width: 0;
+        float: none;
+        min-height: 0%;
+        margin-bottom: 2%;
+    }
+
+    .column .content
+    {
+        width: 300px;
+        height: 250px;
+    }
+
+    .column .content .prewies img
+    {
+        width: 298px;
+        height: 158px;
+
+    }
+    .codrops-demos a 
+    {
+        width: 280px;
+        padding: 0.6em 1.2em;
+    }
+}

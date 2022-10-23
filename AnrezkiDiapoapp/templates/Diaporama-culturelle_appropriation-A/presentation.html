@@ -1,0 +1,39 @@
+{% extends 'base_presentation.html' %}
+{% block changer %}
+<style>
+ .s0
+ {
+    background-image: linear-gradient(rgba(110, 103, 103, 0.507), rgba(10, 15, 10, 0.7)),url("/static/images/Diaporama-appropriation_culturelle-A/moon_culture.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+ .s1
+ {
+    background-image: url("/static/images/console.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+ h1 {
+    color: #fff;
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+    font-weight: 600;
+    line-height:  1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    text-align: center;
+    position: absolute;
+    font-size: 4em;
+    top: 300px;
+}
+
+</style>
+<section class="__slider__ s0 active">
+   <h1>cultural appropriation</h1>
+</section>
+<section class="__slider__ s1 ">
+
+</section>
+{% endblock %}

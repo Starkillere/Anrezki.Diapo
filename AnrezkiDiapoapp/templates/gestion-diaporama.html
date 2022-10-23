@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block changer %}
+<style>
+    .gestion
+    {
+        display: block;
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: #dddedd;
+        
+        width:50%;
+        height:400px;
+        position: relative;
+        padding: 5% 15%;
+        margin: auto;
+    }
+
+    .button
+    {
+        display: block;
+    }
+    button
+    {
+        font-size: 16px;
+        background: #ed8151;
+        border: none;
+        padding: 0.6em 1.2em;
+        color: #fff;
+        font-family: 'Lato', Calibri, Arial, sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: inline-block;
+        margin: 10px;
+        border-radius: 2px;
+        font-weight: 800;
+        outline: none;
+    }
+    button:hover
+    {
+        background: #462213;
+    }
+
+    .loader
+    {
+        display: none;
+    }
+
+    .drop-zone {
+      max-width: 200px;
+      height: 200px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Quicksand", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      cursor: pointer;
+      color: #410b0b;
+      border: 4px dashed #009578;
+      border-radius: 10px;
+    }
+
+    .drop-zone--over {
+      border-style: solid;
+    }
+
+    .drop-zone__input {
+      display: none;
+    }
+
+    .drop-zone__thumb {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #cccccc;
+      background-size: cover;
+      position: relative;
+    }
+
+
+
+    .drop-zone__thumb::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 5px 0;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.75);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 900px)
+    {
+        .gestion
+        {
+            width: 80%;
+        }
+    }
+
+</style>
+    <div class="gestion">
+        <form action="/presentation" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="mode" id="mode">
+            <input type="hidden" name="presentation" value="{{presentation}}">
+            <div class="interaction">
+                <div class="buttons" id="buttons">
+                    <button type="submit" id="laod" onclick="send(this.id)">Télécharger la présentation actuelle</button>
+                    <button type="button" id="modifier" onclick="send(this.id)">Remplacer la  présentation actuelle</button>
+                    <button type="submit" id="visu" onclick="send(this.id)">Visualiser la présentation au format web</button>
+                </div>
+                <div class="loader" id="loader">
+                    <div class="previwie">
+                        <div class="content">
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">Cherger votre fichier</span>
+                                <input id="fileName"  enctype="multipart/form-data" type="file" name="diapo" class="drop-zone__input">
+                            </div>
+                        </div>
+                    </div><br>
+                    <br><button type="submit">Remplacer</button><br>
+                </div>
+            </div>
+        </form>
+        <script>
+            function send(id) {
+                input = document.getElementById("mode");
+                input.value = id;
+                if (id === "modifier"){
+                    document.getElementById("buttons").style.display = "none";
+                    document.getElementById("loader").style.display = "block";
+                }
+            };
+
+            document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+        const dropZoneElement = inputElement.closest(".drop-zone");
+    
+        dropZoneElement.addEventListener("click", (e) => {
+        inputElement.click();
+        });
+    
+        inputElement.addEventListener("change", (e) => {
+        if (inputElement.files.length) {
+            updateThumbnail(dropZoneElement, inputElement.files[0]);
+        }
+        });
+    
+        dropZoneElement.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZoneElement.classList.add("drop-zone--over");
+        });
+    
+        ["dragleave", "dragend"].forEach((type) => {
+        dropZoneElement.addEventListener(type, (e) => {
+            dropZoneElement.classList.remove("drop-zone--over");
+        });
+        });
+    
+        dropZoneElement.addEventListener("drop", (e) => {
+        e.preventDefault();
+    
+        if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+            updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+        }
+    
+        dropZoneElement.classList.remove("drop-zone--over");
+        });
+    });
+    
+    /**
+     * Updates the thumbnail on a drop zone element.
+     *
+     * @param {HTMLElement} dropZoneElement
+     * @param {File} file
+     */
+    function updateThumbnail(dropZoneElement, file) {
+        let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+    
+        // First time - remove the prompt
+        if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+        dropZoneElement.querySelector(".drop-zone__prompt").remove();
+        }
+    
+        // First time - there is no thumbnail element, so lets create it
+        if (!thumbnailElement) {
+        thumbnailElement = document.createElement("div");
+        thumbnailElement.classList.add("drop-zone__thumb");
+        dropZoneElement.appendChild(thumbnailElement);
+        }
+    
+        thumbnailElement.dataset.label = file.name;
+    
+        // Show thumbnail for image files
+        if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+    
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+        };
+        } else {
+        thumbnailElement.style.backgroundImage = null;
+        }
+    }
+  
+        </script>
+    </div>
+{% endblock %}
