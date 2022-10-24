@@ -26,9 +26,6 @@ class User(db.Model):
 def t_init_db():
     db.drop_all()
     db.create_all()
-    admin = User(sha1("admine+complex".encode()).hexdigest(), "ALL")
-    db.session.add(admin)
-    db.session.commit()
 
 @app.route('/', methods=["GET", "POST"])
 def acceuil():
